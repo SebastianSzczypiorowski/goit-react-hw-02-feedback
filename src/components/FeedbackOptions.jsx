@@ -1,21 +1,21 @@
+import React from 'react';
+import PropTypes from 'prop-types'
 
-
-import { useFeedback } from './Statistics';
-
-const Feedback = () => {
-  const { feedback, handleFeedback } = useFeedback();
-
-  const handleClick = (type) => {
-    handleFeedback(type);
-  };
-
+const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-    <>
-      <button onClick={() => {handleClick("good")}}>Good</button>
-      <button onClick={() => {handleClick("neutral")}}>Neutral</button>
-      <button onClick={() => {handleClick("bad")}}>Bad</button>
-    </>
+    <div className="feedback-options">
+      {options.map(option => {
+        return (
+          <button key={option} onClick={() => onLeaveFeedback(option)}>{option}</button>
+        );
+      })}
+    </div>
   );
 };
 
-export default Feedback;
+FeedbackOptions.propTypes = {
+  options: PropTypes.array,
+  onLeaveFeedback: PropTypes.func,
+};
+
+export default FeedbackOptions;

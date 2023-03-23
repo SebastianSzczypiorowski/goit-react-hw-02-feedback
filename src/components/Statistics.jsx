@@ -1,52 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Notification from './Notification';
 
 
-const Statistics = () => {
+const Statistics = ({ good, neutral, bad, total, positivePercentage}) => {
+  return (
+    <>
+    {total === 0 ? (
+      <Notification error="There is no feedback"></Notification>
+    ) : (
+      <div>
+        <p>Good: {good}</p>
+        <p>Neutral: {neutral}</p>
+        <p>Bad: {bad}</p>
+        <p>Total: {total}</p>
+        <p>Positive Feedback: {positivePercentage}%</p>
+      </div>
+    )}
+  </>
+  )
+}
 
-    const [feedback, setFeedback] = useState({
-      good: 0,
-      neutral: 0,
-      bad: 0
-    });
- 
-    const countTotalFeedback = () => {
-        const  {good, neutral, bad } = feedback; 
-        return good+ neutral+ bad;
-    }
+Statistics.propTypes = {
+  good: PropTypes.number,
+  neutral: PropTypes.number,
+  bad: PropTypes.number,
+  total: PropTypes.number,
+  positivePercentage: PropTypes.number,
+};
 
-    const countPositiveFeedbackPercentage = () => {
-        const {good} = feedback;
-        const total = countTotalFeedback();
-        return total === 0 ? 0 : Math.round((good / total) * 100)
-    }
-    return (
-        <>
-        <p>Good: {feedback.good}</p>
-        <p>Neutral: {feedback.neutral}</p>
-        <p>Bad: {feedback.bad}</p>
-        <p>Total: {countTotalFeedback()}</p>
-        <p>Positive Feedback: {countPositiveFeedbackPercentage()}%</p>
-        </>
-    );
-  };
-
-  export const useFeedback = () => {
-    const [feedback, setFeedback] = useState({
-      good: 0,
-      neutral: 0,
-      bad: 0
-    });
-    
-    const handleFeedback = (type) => {
-      setFeedback(prevState => ({ ...prevState, [type]: prevState[type] + 1 }));
-    };
-  
-    return {
-      feedback,
-      handleFeedback
-    };
-  };
-
-
-
- export default Statistics 
+export default Statistics;
