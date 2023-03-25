@@ -1,7 +1,5 @@
-import Section from './Section';
-import Statistics from './Statistics';
-import Feedback from './FeedbackOptions';
-import FeedbackApp from './feedbackApp';
+
+import FeedbackApp from './feedback/feedbackApp';
 
 
 export const App = () => {
