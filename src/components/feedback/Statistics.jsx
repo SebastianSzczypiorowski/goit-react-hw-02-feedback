@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
-
+// 1
 
 const Statistics = ({ good, neutral, bad, total, positivePercentage}) => {
   return (
